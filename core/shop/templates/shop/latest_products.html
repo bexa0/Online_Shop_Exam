@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Main
+{% endblock %}
+
+{% block content %}
+
+{% for lp in latest_pr %}
+    <div class="card" style="width: 18rem;">
+      <img src="{{ lp.image.url }}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <p class="card-text">{{ lp.description }}</p>
+      </div>
+    </div>
+{% endfor %}
+{% endblock %}

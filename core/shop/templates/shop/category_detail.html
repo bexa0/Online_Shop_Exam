@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Main
+{% endblock %}
+
+{% block content %}
+
+    <div class="row gx-4 gx-lg-5 align-items-center my-5">
+    <div class="col-lg-7"><img class="img-fluid rounded mb-4 mb-lg-0"
+                               src="{{ category.image.url }}" alt=""/></div>
+    <div class="col-lg-5">
+        <h1 class="font-weight-light">{{ category.name }}</h1>
+        <p></p>
+        <!--        <a class="btn btn-primary" href="#!">Call to Action!</a>-->
+    </div>
+</div>
+<!-- Call to Action-->
+<div class="card text-white bg-secondary my-5 py-4 text-center">
+    <div class="card-body"><p class="text-white m-0">This call to action card is a great place to showcase some
+        important information or display a clever tagline!</p></div>
+</div>
+
+<div class="row gx-4 gx-lg-5">
+    {% for product in products %}
+
+    <div class="col-md-6 mb-5">
+        <div class="card h-100">
+            <div class="card-body">
+                <h2 class="card-title">{{ product.name }}</h2>
+                <p class="card-text">{{ product.description }}</p>
+<!--                <img src="product.image.url" alt="Place to img"/>-->
+            </div>
+            <div class="card-footer d-flex">
+                <form method="post" action="{% url 'add_to_cart' product_id=product.id %}">
+                    {% csrf_token %}
+                    <button class="btn btn-primary btn-sm" type="submit">add to cart</button>
+<!--                    <input type="submit" name="add" value="add to favorite" class="btn btn-outline-info">-->
+                </form>
+                <form method="post" action="{% url 'add_to_favorite' product_id=product.id %}" class="ms-2">
+                    {% csrf_token %}
+                    <button class="btn btn-outline-info btn-sm" type="submit">Add to Favorite</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {% endfor %}
+</div>
+
+{% endblock %}
